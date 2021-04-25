@@ -36,14 +36,30 @@ Feature: Test
     And complete the waiter app order in table
 
     Examples: 
-      | ip                         |
+      | ip |
       | http://192.168.1.6:3344/ |
 
   @smoketest7
   Scenario Outline: Test online order in pos
     Given open <customerweb> app and place one selfpickup order
     Then complete the online order in pos
-
+  
     Examples: 
       | customerweb                            |
       | https://automation.store.smartbytz.com |
+   
+   
+    @smoketest8
+  Scenario: Test loyalty sale of customer
+  Given Add item to cart and choose customer
+  Then click check for loyalty then apply discount and complete the order 
+  
+  @smoketest9
+  Scenario Outline: Test kitchen display order with notes
+  Given Add order with notes in cart move to table
+  Then open <kitchendisplay>take  and complete the order status
+  And back to poscomplete go to table and complete the order
+  
+  Examples:
+  |kitchendisplay|
+  |http://192.168.1.4:3344/kitchens|

@@ -143,6 +143,40 @@ public class pagenew {
 
 	@FindBy(xpath = "/html/body/div[1]/div/section/div/div[2]/div[2]/div/div[3]/div[2]/div/div[2]/div[2]/div[3]/div[2]/button")
 	WebElement online_order_dispatch_button;
+	
+	@FindBy(xpath = "/html/body/div[1]/div/section/div/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/button[2]")
+	WebElement cart_add_cust_button;
+
+	@FindBy(xpath = "/html/body/div[4]/div[1]/div/div/div/div[1]/div/div/input")
+	WebElement search_cust_button;
+	
+	@FindBy(xpath = "/html/body/div[4]/div[1]/div/div/div/div[2]/div/div/div")
+	WebElement select_cust_button;
+	
+	@FindBy(xpath = "/html/body/div[1]/div/section/div/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div/div/button")
+	WebElement click_cust_button;
+	
+	@FindBy(xpath = "/html/body/div[1]/div/section/div/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div/div/ul/li[3]/a")
+	WebElement check_loyalty_button;
+	
+	@FindBy(xpath = "/html/body/div[4]/div[1]/div/div/div/div/button")
+	WebElement loyalty_discount_button;
+	
+	@FindBy(xpath = "/html/body/div[4]/div[1]/div/div/footer/button[2]")
+	WebElement loyalty_apply_button;
+	
+	@FindBy(xpath ="/html/body/div[1]/div/section/div/div[2]/div[2]/div/div/div[2]/div/div/div[1]/div/div[1]/div/button")
+	WebElement item_corner_button;
+	
+	@FindBy(xpath ="/html/body/div[1]/div/section/div/div[2]/div[2]/div/div/div[2]/div/div/div[1]/div/div[1]/div/ul/li[2]/a")
+	WebElement add_notes_button;
+	
+	@FindBy(xpath ="/html/body/div[4]/div[1]/div/div/div/textarea")
+	WebElement type_notes_area;
+	
+	@FindBy(xpath ="//button[@class='close']")
+	WebElement close_notes_button;
+	
 
 	WebDriver driver;
 	Actions action = null;
@@ -351,4 +385,60 @@ public class pagenew {
 
 	}
 
+	 public void add_items_to_cart() {
+		 
+		 item_name1.click();
+		 item_name4.click();
+		 checkout_button.click();
+		 
+	   }
+
+	    public void add_customer_add_loalty_order_complete() {
+	    	
+	    	cart_add_cust_button.click();
+	   	   search_cust_button.sendKeys("sunitha");
+	   	   select_cust_button.click();
+	       click_cust_button.click();
+	       Set<String> loyaltywindow = driver.getWindowHandles();
+			for (String newloyaltywindow : loyaltywindow) {
+				driver.switchTo().window(newloyaltywindow);
+			} 
+	       check_loyalty_button.click();
+	       loyalty_discount_button.click();
+	       loyalty_apply_button.click();
+	       driver.switchTo().defaultContent();
+	       confrm_button.click();
+	       order_success_button.click();
+	       driver.close();
+	    }
+		
+	     	public void add_items_to_cart_with_notes_move_to_table() throws Throwable {
+			
+			item_name1.click();
+			item_corner_button.click();
+			add_notes_button.click();
+			Set<String> addnoteswindow = driver.getWindowHandles();
+			for (String newaddnoteswindow : addnoteswindow) {
+				driver.switchTo().window(newaddnoteswindow);
+			} 
+			type_notes_area.sendKeys("Add more Ice");
+			Thread.sleep(2000);
+			close_notes_button.click();
+			driver.switchTo().defaultContent();
+			checkout_button.click();
+			assign_table_button.click();
+			Set<String> tablewindow = driver.getWindowHandles();
+			for (String newtablewindow : tablewindow) {
+				driver.switchTo().window(newtablewindow);
+			}
+			table_name_button.click();
+			table_done_button.click();
+			driver.switchTo().defaultContent();
+			send_kot_button.click();
+			table_order_success_button.click();
+		
+		}
+		
+			
+	
 }

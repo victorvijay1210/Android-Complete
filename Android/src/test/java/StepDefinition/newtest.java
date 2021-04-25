@@ -13,7 +13,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import PageFactory.pagenew;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -243,7 +244,7 @@ public class newtest {
 
 		// place order in waiter app
 		System.setProperty("webdriver.chrome.driver",
-				"C:\\Users\\VIJAY\\eclipse-workspace\\Android\\newchrome version driver\\chromedriver.exe");
+				"C:\\Users\\VIJAY\\git\\Android-Complete\\Android\\newchrome version driver\\chromedriver.exe");
 		WebDriver drivernew = new ChromeDriver();
 		drivernew.navigate().to(ip);
 		drivernew.manage().window().maximize();
@@ -307,7 +308,7 @@ public class newtest {
 	public void open_app_and_place_one_selfpickup_order(String customerweb) throws Throwable {
 
 		System.setProperty("webdriver.chrome.driver",
-				"C:\\Users\\VIJAY\\eclipse-workspace\\Android\\newchrome version driver\\chromedriver.exe");
+				"C:\\Users\\VIJAY\\git\\Android-Complete\\Android\\newchrome version driver\\chromedriver.exe");
 		WebDriver drivernew1 = new ChromeDriver();
 		drivernew1.navigate().to(customerweb);
 		drivernew1.manage().window().maximize();
@@ -364,6 +365,106 @@ public class newtest {
 		pge = new pagenew(driver);
 		pge.online_order_complete();
 		driver.quit();
+		
+	}
+	
+		   @Given("^Add item to cart and choose customer$")
+		    public void add_item_to_cart_and_choose_customer() throws Throwable {
+		        
+			  pge = new pagenew(driver);
+			  pge.add_items_to_cart();
+			  
+			  
+		    }
+		  
+		  @Then("^click check for loyalty then apply discount and complete the order$")
+		    public void click_check_for_loyalty_then_apply_discount_and_complete_the_order() throws Throwable {
+		    
+			  pge = new pagenew(driver);
+			  pge.add_customer_add_loalty_order_complete();
+			  driver.close();
+			    
+		    }
+
+		  @Given("^Add order with notes in cart move to table$")
+		    public void add_order_with_notes_in_cart_move_to_table() throws Throwable {
+	        
+			// enable waiter app
+				Thread.sleep(5000);
+				TouchAction action = new TouchAction(driver);
+				WebElement cash = driver
+						.findElement(By.xpath("/html/body/div[1]/div/section/div/div[2]/div[1]/ul/li[6]/a/span"));
+				cash.click();
+				action.press(PointOption.point(90, 900)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3)))
+						.moveTo(PointOption.point(90, 600)).release().perform();
+				WebElement settings = driver
+						.findElement(By.xpath("/html/body/div[1]/div/section/div/div[2]/div[1]/ul/li[8]/a"));
+				settings.click();
+				WebElement showorderconfm = driver.findElement(By.xpath(
+						"/html/body/div[1]/div/section/div/div[2]/div[2]/div/div/div[2]/div/div[2]/div[10]/div/div/label/span"));
+				showorderconfm.click();
+				action.press(PointOption.point(1795, 971)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3)))
+						.moveTo(PointOption.point(1795, 570)).release().perform();
+				showorderconfm.click();
+				WebElement waiterapp = driver.findElement(By.xpath(
+						"/html/body/div[1]/div/section/div/div[2]/div[2]/div/div/div[2]/div/div[2]/div[13]/div/div/label/span"));
+				waiterapp.click();
+				cash.click();
+				action.press(PointOption.point(90, 637)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3)))
+						.moveTo(PointOption.point(90, 935)).release().perform();
+				WebElement sell = driver.findElement(By.xpath("/html/body/div[1]/div/section/div/div[2]/div[1]/ul/li[1]/a"));
+				sell.click();
+				Thread.sleep(3000);
+				
+			  pge = new pagenew(driver);
+			  pge.add_items_to_cart_with_notes_move_to_table();
+			  
+		  }
+
+		  @Then("^open (.+)take  and complete the order status$")
+		    public void open_take_and_complete_the_order_status(String kitchendisplay) throws Throwable {
+
+			  System.setProperty("webdriver.chrome.driver",
+						"C:\\Users\\VIJAY\\git\\Android-Complete\\Android\\newchrome version driver\\chromedriver.exe");
+				WebDriver drivernew2 = new ChromeDriver();
+				drivernew2.navigate().to(kitchendisplay);
+				drivernew2.manage().window().maximize();
+				drivernew2.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+				WebDriverWait wait = new WebDriverWait(drivernew2,30);
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'common kitchen')]")));
+				WebElement commonkitchen = drivernew2.findElement(By.xpath("//a[contains(text(),'common kitchen')]"));
+				commonkitchen.click();
+				Thread.sleep(2000);
+				WebElement accept = drivernew2.findElement(By.xpath("//div[contains(text(),'accept')]"));
+				accept.click();
+				Thread.sleep(3000);
+				WebElement ready = drivernew2.findElement(By.xpath("//div[contains(text(),'ready')]"));
+				ready.click();
+				Thread.sleep(3000);
+				WebElement dispatched = drivernew2.findElement(By.xpath("//div[contains(text(),'dispatched')]"));
+				dispatched.click();
+				Thread.sleep(3000);
+				drivernew2.close();
+		  
+		  
+		  }
+		  
+		  
+		  @And("^back to poscomplete go to table and complete the order$")
+		    public void back_to_poscomplete_go_to_table_and_complete_the_order() throws Throwable {
+
+			  pge = new pagenew(driver);
+			  pge.waiter_app_order_complete();
+		  
+		  }
+		  
+		  
+		  
+	
+	
 	}
 
-}
+	
+	
+	
+
