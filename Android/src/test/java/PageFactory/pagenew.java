@@ -177,6 +177,9 @@ public class pagenew {
 	@FindBy(xpath ="//button[@class='close']")
 	WebElement close_notes_button;
 	
+	@FindBy(xpath ="/html/body/div[1]/div/section/div/div[2]/div[2]/div/div[3]/div[2]/div/div[2]/div[2]/div[3]/div[2]/button")
+	WebElement online_order_status_change_button;
+	
 
 	WebDriver driver;
 	Actions action = null;
@@ -370,6 +373,7 @@ public class pagenew {
 
 		table_tab.click();
 		table_complete.click();
+		Thread.sleep(3000);
 		confrm_button.click();
 		order_success_button.click();
 
@@ -393,7 +397,7 @@ public class pagenew {
 		 
 	   }
 
-	    public void add_customer_add_loalty_order_complete() {
+	    public void add_customer_add_loalty_order_complete() throws Throwable {
 	    	
 	    	cart_add_cust_button.click();
 	   	   search_cust_button.sendKeys("sunitha");
@@ -407,9 +411,10 @@ public class pagenew {
 	       loyalty_discount_button.click();
 	       loyalty_apply_button.click();
 	       driver.switchTo().defaultContent();
+	       Thread.sleep(3000);
 	       confrm_button.click();
 	       order_success_button.click();
-	       driver.close();
+	     
 	    }
 		
 	     	public void add_items_to_cart_with_notes_move_to_table() throws Throwable {
@@ -438,7 +443,26 @@ public class pagenew {
 			table_order_success_button.click();
 		
 		}
-		
+
+	     	public void zomato_online_order_complete() throws Throwable {
+	    		Thread.sleep(10000);
+	    		try {
+	    		online_order_tab.click();
+	    		online_order_status_change_button.click();
+	    		Thread.sleep(3000);
+	    		online_order_status_change_button.click();
+	    		Thread.sleep(3000);
+	    		online_order_status_change_button.click();
+	    		Thread.sleep(3000);
+	    		online_order_status_change_button.click();
+	    		}
+	    		catch(Exception e) {
+	    	
+	    			System.out.println("Exception received is" + e);
+	    		}
+	    		
+	    	}
+	    	
 			
 	
 }

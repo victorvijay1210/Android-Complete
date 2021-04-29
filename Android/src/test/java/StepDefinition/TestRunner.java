@@ -8,7 +8,7 @@ import io.cucumber.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/resources/androidfeature", glue = {
-		"StepDefinition" }, tags = "@smoketest9", monochrome = true, plugin = { "json:target/cucumber.json" }
+		"StepDefinition" }, tags = "@smoketest8", monochrome = true, plugin = { "json:target/cucumber.json" }
 
 )
 

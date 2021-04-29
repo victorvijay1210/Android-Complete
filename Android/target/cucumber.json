@@ -1,0 +1,97 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "line": 4,
+        "name": "launch the app",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 120598000000,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "open the Posbytz app",
+            "match": {
+              "location": "StepDefinition.newtest.open_the_posbytz_app()"
+            },
+            "keyword": "Given "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2021-04-29T18:53:29.418Z",
+        "line": 53,
+        "name": "Test loyalty sale of customer",
+        "description": "",
+        "id": "test;test-loyalty-sale-of-customer",
+        "after": [
+          {
+            "result": {
+              "duration": 2000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "StepDefinition.newtest.embedScreenshotOnFail(io.cucumber.java.Scenario)"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 7674000000,
+              "status": "passed"
+            },
+            "line": 54,
+            "name": "Add item to cart and choose customer",
+            "match": {
+              "location": "StepDefinition.newtest.add_item_to_cart_and_choose_customer()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 22938000000,
+              "status": "passed"
+            },
+            "line": 55,
+            "name": "click check for loyalty then apply discount and complete the order",
+            "match": {
+              "location": "StepDefinition.newtest.click_check_for_loyalty_then_apply_discount_and_complete_the_order()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sanitytest1"
+          },
+          {
+            "name": "@smoketest8"
+          }
+        ]
+      }
+    ],
+    "name": "Test",
+    "description": "",
+    "id": "test",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/androidfeature/android.feature",
+    "tags": [
+      {
+        "name": "@sanitytest1",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      }
+    ]
+  }
+]

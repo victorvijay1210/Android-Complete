@@ -1,4 +1,4 @@
-@sanitytest
+@sanitytest1
 Feature: Test
 
   Background: launch the app
@@ -18,7 +18,7 @@ Feature: Test
 
     Examples: 
       | customername | phonenumber |
-      | arjun         |  9888902001 |
+      | kabil         |  9666902001 |
 
   @smoketest4
   Scenario: Test discount order sale with modifiers and tips
@@ -37,7 +37,7 @@ Feature: Test
 
     Examples: 
       | ip |
-      | http://192.168.1.6:3344/ |
+      | http://192.168.1.3:3344/ |
 
   @smoketest7
   Scenario Outline: Test online order in pos
@@ -57,9 +57,9 @@ Feature: Test
   @smoketest9
   Scenario Outline: Test kitchen display order with notes
   Given Add order with notes in cart move to table
-  Then open <kitchendisplay>take  and complete the order status
+  Then open <kitchendisplay> take  and complete the order status
   And back to poscomplete go to table and complete the order
   
   Examples:
   |kitchendisplay|
-  |http://192.168.1.4:3344/kitchens|
+  |http://192.168.1.3:3344/kitchens|

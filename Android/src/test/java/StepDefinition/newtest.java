@@ -12,6 +12,8 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,6 +24,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -45,13 +48,100 @@ public class newtest {
 		}
 
 	}
+
+	@Before("@smoketest10")
+	public void login_zomato_order_account() throws Throwable {
+		
+		DesiredCapabilities cap = new DesiredCapabilities();
+		cap.setCapability("deviceName", "T1 ");
+		cap.setCapability("udid", "192.168.1.3:5555");
+		cap.setCapability("platformName", "Android");
+		cap.setCapability("platformVersion", "6.0.1");
+		cap.setCapability("appPackage", "com.posbytz.complete.staging");
+		cap.setCapability("appActivity", "com.smartbytz.pos.SplashScreen");
+		URL url = new URL("http://0.0.0.0:4723/wd/hub");
+		driver = new AppiumDriver<MobileElement>(cap);
+		Thread.sleep(5000);
+		MobileElement allow1 = driver.findElement(By.xpath(
+				"/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.Button[2]"));
+		allow1.click();
+		MobileElement allow2 = driver.findElement(By.xpath(
+				"/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.Button[2]"));
+		allow2.click();
+
+		Thread.sleep(20000);
+
+		// Switching to webview
+		Set<String> contextNames = driver.getContextHandles();
+		for (String contextName : contextNames) {
+			System.out.println(contextName);
+		}
+		// set context to WEBVIEW_<APP_PKG_NAME>
+		driver.context((String) contextNames.toArray()[1]);
+		driver.navigate().refresh();
+		parent = driver.getWindowHandle();
+//		Set<String> childwindow1 = driver.getWindowHandles();
+//		for (String newWindows1 : childwindow1) {
+//			driver.switchTo().window(newWindows1);
+//		}
+//		Thread.sleep(5000);
+//		driver.findElement(By.xpath("//button[@class='btn btn-secondary']")).click();
+//		driver.switchTo().defaultContent();
+		Thread.sleep(10000);
+		driver.findElement(By.xpath("/html/body/div[1]/div/section/div/div[1]/div/form/div[1]/fieldset/div/input"))
+				.sendKeys("cloudasif");
+		driver.findElement(By.xpath("/html/body/div[1]/div/section/div/div[1]/div/form/div[2]/fieldset/div/div/input"))
+				.sendKeys("qwert@123");
+		driver.findElement(By.xpath("/html/body/div[1]/div/section/div/div[1]/div/form/div[3]/fieldset/div/input"))
+				.sendKeys("4158F3D6");
+		driver.findElement(By.xpath("/html/body/div[1]/div/section/div/div[1]/div/form/button")).click();
+
+		Thread.sleep(5000);
+		Set<String> childwindow11 = driver.getWindowHandles();
+		for (String newWindows12 : childwindow11) {
+			driver.switchTo().window(newWindows12);
+		}
+		driver.findElement(By.xpath("/html/body/div[3]/div/div[4]/div[2]/button")).click();
+		driver.switchTo().defaultContent();
+
+		Thread.sleep(20000);
+		driver.findElement(By.xpath("//*[@id=\"__layout\"]/section/div/div[1]/div[2]/div[3]/div/p")).click();
+		driver.findElement(By.xpath("//*[@id=\"__layout\"]/section/div[2]/div[2]/div/div/div/div[1]/div[1]/button"))
+				.click();
+		driver.findElement(By.xpath("//*[@id=\"__layout\"]/section/div[2]/div[2]/div/div/div/div[1]/div[2]/button"))
+				.click();
+		driver.findElement(By.xpath("//*[@id=\"__layout\"]/section/div[2]/div[2]/div/div/div/div[1]/div[3]/button"))
+				.click();
+		driver.findElement(By.xpath("//*[@id=\"__layout\"]/section/div[2]/div[2]/div/div/div/div[2]/div[1]/button"))
+				.click();
+		driver.findElement(By.xpath("//*[@id=\"__layout\"]/section/div[2]/div[2]/div/div/div/div[2]/div[2]/button"))
+				.click();
+		driver.findElement(By.xpath("//*[@id=\"__layout\"]/section/div[2]/div[2]/div/div/div/div[2]/div[3]/button"))
+				.click();
+
+		Thread.sleep(5000);
+
+		Set<String> opencashWin = driver.getWindowHandles();
+		for (String cashdrawer : opencashWin) {
+			driver.switchTo().window(cashdrawer);
+		}
+		driver.findElement(By.xpath("/html/body/div[4]/div[1]/div/div/footer/button")).click();
+
+		driver.switchTo().defaultContent();
+		driver.findElement(By.xpath("/html/body/div[3]/div/div[4]/div/button")).click();
+		Thread.sleep(5000);
+		
+		
+     	}
 	
+	
+
 
 	@Given("^open the Posbytz app$")
 	public void open_the_posbytz_app() throws Throwable {
 		DesiredCapabilities cap = new DesiredCapabilities();
 		cap.setCapability("deviceName", "T1 ");
-		cap.setCapability("udid", "192.168.1.6:5555");
+		cap.setCapability("udid", "192.168.1.3:5555");
 		cap.setCapability("platformName", "Android");
 		cap.setCapability("platformVersion", "6.0.1");
 		cap.setCapability("appPackage", "com.posbytz.complete.staging");
@@ -221,27 +311,27 @@ public class newtest {
 		WebElement cash = driver
 				.findElement(By.xpath("/html/body/div[1]/div/section/div/div[2]/div[1]/ul/li[6]/a/span"));
 		cash.click();
-		action.press(PointOption.point(90, 900)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3)))
-				.moveTo(PointOption.point(90, 600)).release().perform();
+		action.press(PointOption.point(62, 630)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3)))
+				.moveTo(PointOption.point(62, 470)).release().perform();
 		WebElement settings = driver
 				.findElement(By.xpath("/html/body/div[1]/div/section/div/div[2]/div[1]/ul/li[8]/a"));
 		settings.click();
 		WebElement showorderconfm = driver.findElement(By.xpath(
 				"/html/body/div[1]/div/section/div/div[2]/div[2]/div/div/div[2]/div/div[2]/div[10]/div/div/label/span"));
 		showorderconfm.click();
-		action.press(PointOption.point(1795, 971)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3)))
-				.moveTo(PointOption.point(1795, 570)).release().perform();
+		action.press(PointOption.point(1277, 650)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3)))
+				.moveTo(PointOption.point(1277, 445)).release().perform();
 		showorderconfm.click();
 		WebElement waiterapp = driver.findElement(By.xpath(
 				"/html/body/div[1]/div/section/div/div[2]/div[2]/div/div/div[2]/div/div[2]/div[13]/div/div/label/span"));
 		waiterapp.click();
 		cash.click();
-		action.press(PointOption.point(90, 637)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3)))
-				.moveTo(PointOption.point(90, 935)).release().perform();
+		action.press(PointOption.point(62, 470)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3)))
+				.moveTo(PointOption.point(62, 630)).release().perform();
 		WebElement sell = driver.findElement(By.xpath("/html/body/div[1]/div/section/div/div[2]/div[1]/ul/li[1]/a"));
 		sell.click();
-		Thread.sleep(3000);
-
+		Thread.sleep(3000);	
+		
 		// place order in waiter app
 		System.setProperty("webdriver.chrome.driver",
 				"C:\\Users\\VIJAY\\git\\Android-Complete\\Android\\newchrome version driver\\chromedriver.exe");
@@ -293,6 +383,7 @@ public class newtest {
 		close2.click();
 		WebElement submit2 = drivernew.findElement(By.xpath("/html/body/div[2]/button[2]"));
 		submit2.click();
+		drivernew.close();
 
 	}
 
@@ -301,7 +392,7 @@ public class newtest {
 
 		pge = new pagenew(driver);
 		pge.waiter_app_order_complete();
-		driver.close();
+		driver.quit();
 	}
 
 	@Given("^open (.+) app and place one selfpickup order$")
@@ -382,7 +473,7 @@ public class newtest {
 		    
 			  pge = new pagenew(driver);
 			  pge.add_customer_add_loalty_order_complete();
-			  driver.close();
+			  driver.quit();
 			    
 		    }
 
@@ -395,26 +486,26 @@ public class newtest {
 				WebElement cash = driver
 						.findElement(By.xpath("/html/body/div[1]/div/section/div/div[2]/div[1]/ul/li[6]/a/span"));
 				cash.click();
-				action.press(PointOption.point(90, 900)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3)))
-						.moveTo(PointOption.point(90, 600)).release().perform();
+				action.press(PointOption.point(62, 630)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3)))
+						.moveTo(PointOption.point(62, 470)).release().perform();
 				WebElement settings = driver
 						.findElement(By.xpath("/html/body/div[1]/div/section/div/div[2]/div[1]/ul/li[8]/a"));
 				settings.click();
 				WebElement showorderconfm = driver.findElement(By.xpath(
 						"/html/body/div[1]/div/section/div/div[2]/div[2]/div/div/div[2]/div/div[2]/div[10]/div/div/label/span"));
 				showorderconfm.click();
-				action.press(PointOption.point(1795, 971)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3)))
-						.moveTo(PointOption.point(1795, 570)).release().perform();
+				action.press(PointOption.point(1277, 650)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3)))
+						.moveTo(PointOption.point(1277, 445)).release().perform();
 				showorderconfm.click();
 				WebElement waiterapp = driver.findElement(By.xpath(
 						"/html/body/div[1]/div/section/div/div[2]/div[2]/div/div/div[2]/div/div[2]/div[13]/div/div/label/span"));
 				waiterapp.click();
 				cash.click();
-				action.press(PointOption.point(90, 637)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3)))
-						.moveTo(PointOption.point(90, 935)).release().perform();
+				action.press(PointOption.point(62, 470)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3)))
+						.moveTo(PointOption.point(62, 630)).release().perform();
 				WebElement sell = driver.findElement(By.xpath("/html/body/div[1]/div/section/div/div[2]/div[1]/ul/li[1]/a"));
 				sell.click();
-				Thread.sleep(3000);
+				Thread.sleep(3000);	
 				
 			  pge = new pagenew(driver);
 			  pge.add_items_to_cart_with_notes_move_to_table();
@@ -438,7 +529,7 @@ public class newtest {
 				WebElement accept = drivernew2.findElement(By.xpath("//div[contains(text(),'accept')]"));
 				accept.click();
 				Thread.sleep(3000);
-				WebElement ready = drivernew2.findElement(By.xpath("//div[contains(text(),'ready')]"));
+				WebElement ready = drivernew2.findElement(By.xpath("//body/div[1]/div[2]/div[2]/div[5]"));
 				ready.click();
 				Thread.sleep(3000);
 				WebElement dispatched = drivernew2.findElement(By.xpath("//div[contains(text(),'dispatched')]"));
@@ -455,10 +546,88 @@ public class newtest {
 
 			  pge = new pagenew(driver);
 			  pge.waiter_app_order_complete();
-		  
+		      driver.quit();
 		  }
 		  
+		  @Given("^Open test satelite and place one order$")
+		    public void open_test_satelite_and_place_one_order() throws Throwable {
+	       
+			  System.setProperty("webdriver.chrome.driver",
+						"C:\\Users\\VIJAY\\git\\Android-Complete\\Android\\newchrome version driver\\chromedriver.exe");
+				WebDriver drivernew3 = new ChromeDriver();
+				drivernew3.navigate().to("https://test-satellite.urbanpiper.com/login");
+				drivernew3.manage().window().maximize();
+				drivernew3.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+				JavascriptExecutor jsnew = (JavascriptExecutor) drivernew3;
+		        WebElement testusername = drivernew3.findElement(By.xpath("//input[@id='username']"));
+		        testusername.sendKeys("pos+posbytz");   
+		        WebElement testuserpassword = drivernew3.findElement(By.xpath("//input[@id='password']"));
+		        testuserpassword.sendKeys("asvqmznkwk");
+		        WebElement testlogin = drivernew3.findElement(By.xpath("//body/div[@id='root']/div[1]/div[2]/form[1]/div[3]/input[1]"));
+		        testlogin.click();
+		        Thread.sleep(5000);
+		        WebElement teststartorder = drivernew3.findElement(By.xpath("//span[contains(text(),'Start Order')]"));
+		        teststartorder.click();
+		        WebElement testphoneno = drivernew3.findElement(By.xpath("//body/div[@id='root']/div[@id='content']/div[3]/div[1]/div[1]/div[1]/div[3]/div[1]/div[2]/input[1]"));
+		        testphoneno.sendKeys("9841205708");
+		        WebElement testlocationswitch = drivernew3.findElement(By.xpath("//body/div[@id='root']/div[@id='content']/div[3]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/img[1]"));
+		        testlocationswitch.click();
+		        WebElement testsearchstore = drivernew3.findElement(By.xpath("//body/div[@id='root']/div[@id='content']/div[3]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]"));
+		        testsearchstore.click();
+		        WebElement selectstore = drivernew3.findElement(By.xpath("//div[contains(text(),'VADAPALANI')]"));
+		        selectstore.click();
+		        WebElement startorder = drivernew3.findElement(By.xpath("//body/div[@id='root']/div[@id='content']/div[3]/div[1]/div[1]/div[3]/input[1]"));
+		        startorder.click();
+		        Thread.sleep(8000);
+		        WebElement selectitem = drivernew3.findElement(By.xpath("//a[contains(text(),'Add')]"));
+		        selectitem.click();
+			
+				WebElement itemcart = drivernew3.findElement(By.xpath("//body/div[@id='root']/div[@id='content']/div[3]/div[1]/div[1]/div[2]/div[1]/div[2]"));
+				itemcart.click();
+				WebElement cartcheckout = drivernew3.findElement(By.xpath("//a[contains(text(),'checkout')]"));
+				cartcheckout.click();
+				Thread.sleep(2000);
+				WebElement newaddresson = drivernew3.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[1]/div/div[1]/div[3]/div[2]/div/div[1]/div[3]"));
+				newaddresson.click();
+				Thread.sleep(2000);
+				WebElement enterlocatity = drivernew3.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[1]/div/div[1]/div[3]/div[2]/div/div[2]/div/div/div/div[1]/input"));
+				enterlocatity.sendKeys("Chennai, Tamil Nadu, India");
+				WebElement selectaddress = drivernew3.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[1]/div/div[1]/div[3]/div[2]/div/div[2]/div/div/div/div[2]/ul/li[1]/span"));
+				selectaddress.click();
+				Thread.sleep(2000);
+				jsnew.executeScript("window.scrollBy(0,200)");
+				WebElement enterpincode = drivernew3.findElement(By.xpath("//body/div[@id='root']/div[@id='content']/div[3]/div[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1]/div[1]/input[4]"));
+				enterpincode.sendKeys("600028");
+				WebElement entercity = drivernew3.findElement(By.xpath("//body/div[@id='root']/div[@id='content']/div[3]/div[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1]/div[1]/input[3]"));
+				entercity.sendKeys("chennai");
+				WebElement enteraddress = drivernew3.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[1]/div/div[1]/div[3]/div[2]/div/div[2]/div/div/input[1]"));
+				enteraddress.sendKeys("chennai");
+				jsnew.executeScript("window.scrollBy(0,1000)");
+				Thread.sleep(2000);
+				WebElement orderingchannel = drivernew3
+						.findElement(By.xpath("//div[contains(text(),'Satellite')]"));
+				orderingchannel.click();
+				Thread.sleep(2000);
+				WebElement zomato = drivernew3.findElement(By.xpath("//div[contains(text(),'Zomato')]"));
+				zomato.click();
+				WebElement orderid = drivernew3.findElement(By.xpath("//body/div[@id='root']/div[@id='content']/div[3]/div[1]/div[1]/div[1]/div[7]/div[2]/div[2]/input[1]"));
+				orderid.sendKeys("111");
+				WebElement placeorder = drivernew3.findElement(By.xpath("//a[contains(text(),'Place Order')]"));
+				placeorder.click();
+				Thread.sleep(3000);
+				drivernew3.quit();
+				
+		  } 
+		 
+		  @Then("^Compelete zomato order$")
+		    public void compelete_zomato_order() throws Throwable {
+	         
+			  pge = new pagenew(driver);
+			  pge.zomato_online_order_complete();
+			  driver.quit();
 		  
+		  
+		  }
 		  
 	
 	
